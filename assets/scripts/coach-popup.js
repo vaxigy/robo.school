@@ -6,8 +6,6 @@
     content: document.getElementById('coach-content')
   }
 
-  let currentCoach = null;
-
   function handleOuterClick(event) {
     if (event.target === popupWrap) {
       closeCoachPopup();
@@ -33,7 +31,7 @@
           <img src="./assets/images/icon-instagram.png" alt="instagram">
         </div>
       </div>
-    `
+    `;
     return info;
   }
 
@@ -56,22 +54,20 @@
     popupParts.profile.appendChild(closeButton);
   }
 
-  function renderTabButtons() {
+  function renderTabButtons(coach) {
     popupParts.tabs.innerHTML = '';
 
     popupParts.tabs.innerHTML = `
-      <button id="education">Образование</button>
-      <button id="experience">Опыт работы</button>
-      <button id="rewards">Награды</button>
+      <button content-key="education">Образование</button>
+      <button content-key="experience">Опыт работы</button>
+      <button content-key="rewards">Награды</button>
     `;
 
-    for (const tab of popupParts.tabs.children) {
-      tab.addEventListener('click', handleTabClick);
-    }
+    popupParts.tabs.addEventListener('click', event => handleTabClick(event, coach));
   }
 
-  function handleTabClick(event) {
-    if (currentCoach) {
+  function handleTabClick(event, coach) {
+    if (event.target.tagName === 'BUTTON') {
       const selectedTab = event.target;
 
       for (const tab of popupParts.tabs.children) {
@@ -79,24 +75,22 @@
       }
       selectedTab.classList.add('active');
 
-      loadCoachPopupContent(selectedTab.id, currentCoach);
+      loadCoachPopupContent(coach, selectedTab.getAttribute('content-key'));
     }
   }
 
-  function loadCoachPopupContent(callTab, coach) {
+  function loadCoachPopupContent(coach, contentKey) {
     popupParts.content.innerHTML = '';
 
-    popupParts.content.innerHTML = coach.details[callTab];
+    popupParts.content.innerHTML = coach.details[contentKey];
   }
 
   function showCoachPopup(coach) {
-    currentCoach = coach;
+    renderProfileSection(coach);
+    renderTabButtons(coach);
 
-    renderProfileSection(currentCoach);
-    renderTabButtons();
-
-    loadCoachPopupContent('education', coach);
-    popupParts.tabs.querySelector('#education').classList.add('active');
+    loadCoachPopupContent(coach, 'education');
+    popupParts.tabs.querySelector('[content-key="education"]').classList.add('active');
 
     popupWrap.style.visibility = 'visible';
   }
@@ -105,8 +99,6 @@
     for (const key in popupParts) {
       popupParts[key].innerHTML = '';
     }
-
-    currentCoach = null;
 
     popupWrap.style.visibility = 'hidden';
   }

@@ -13,23 +13,27 @@
       <p>${coach.occupation}</p>
       <button>Подробнее</button>
     `;
-
-    card.querySelectorAll('img, button').forEach(
-      element => element.addEventListener('click', () => handleCoachCardClick(coach))
-    );
-
     return card;
   }
 
-  function handleCoachCardClick(coach) {
-    showCoachPopup(coach);
-  }
-
   function renderCoachCards() {
-    coachData.forEach(coach => {
+    coachData.forEach((coach, index) => {
       const card = createCoachCard(coach);
+      card.setAttribute('coach-index', index);
       coachesContainer.appendChild(card);
     });
+
+    coachesContainer.addEventListener('click', handleCoachCardClick);
+  }
+
+  function handleCoachCardClick(event) {
+    if (
+      event.target.tagName === 'IMG' ||
+      event.target.tagName === 'BUTTON'
+    ) {
+      const coach = coachData[event.target.parentNode.getAttribute('coach-index')];
+      showCoachPopup(coach);
+    }
   }
 
   function createScrollButton(className) {
