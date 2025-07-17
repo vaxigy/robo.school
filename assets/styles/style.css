@@ -4,26 +4,6 @@
   --accent-color: #D52027;
 }
 
-/* #region scrollbar */
-
-::-webkit-scrollbar {
-  width: 5px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #14102414;
-  border-radius: 10px;
-  margin-right: 80rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--main-color);
-  border-radius: 10px;
-}
-
-/* #endregion scrollbar */
-
 /* #region base */
 
 *,
@@ -68,17 +48,10 @@ a {
   margin: 0 auto;
 }
 
-.container-hero {
-  max-width: 1330px;
-  margin: 0 auto;
-}
-
 .container {
   max-width: 1160px;
   margin: 0 auto;
 }
-
-
 
 /* #endregion base */
 
@@ -86,13 +59,13 @@ a {
 
 header {
   background: var(--main-color);
+  padding: 3rem 0;
 }
 
 .header-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 0;
 }
 
 .header-wrap a {
@@ -181,7 +154,99 @@ header {
 
 /* #endregion hero */
 
+/* #region about */
+
+.about {
+  padding: 12rem 0;
+}
+
+.about-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.about-text {
+  font-weight: 400;
+  font-size: 3rem;
+}
+
+.about-text span {
+  font-weight: 600;
+}
+
+.about-achievements {
+  display: flex;
+  justify-content: space-between;
+}
+
+.about-achievements-item h3 {
+  font-weight: 600;
+  font-size: 7rem;
+  color: var(--accent-color);
+}
+
+.about-achievements-item p {
+  font-weight: 400;
+  color: #141024B2;
+}
+
+/* #endregion about */
+
+/* #region outcomes */
+
+.outcomes {
+  background: #F9F9F9;
+  padding: 10rem 0;
+}
+
+.outcomes-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.outcomes-wrap h2 {
+  font-weight: 600;
+  font-size: 5rem;
+}
+
+.outcomes-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.outcomes-item {
+  position: relative;
+}
+
+.outcomes-item h3 {
+  font-weight: 600;
+  font-size: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.outcomes-item p {
+  color: #141024B2;
+}
+
+.info-icon {
+  position: absolute;
+  left: 11.5rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  object-fit: contain;
+  background: url(../images/icon-info.png) center / contain;
+  border-radius: 50%;
+}
+
+/* #endregion outcomes */
+
 /* #region coaches */
+
+.coaches {
+  padding: 12rem 0;
+}
 
 .coaches-wrap {
   position: relative;
@@ -241,6 +306,22 @@ header {
   cursor: pointer;
 }
 
+.coach-list::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+
+.coach-list::-webkit-scrollbar-track {
+  background: #14102414;
+  border-radius: 10px;
+  margin-right: 80rem;
+}
+
+.coach-list::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 10px;
+}
+
 /* #endregion coaches */
 
 /* #region coach popup */
@@ -251,6 +332,7 @@ header {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.25);
+  z-index: 10000;
 }
 
 .coach-popup {
