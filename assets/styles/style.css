@@ -324,6 +324,76 @@ header {
 
 /* #endregion coaches */
 
+/* #region pricing */
+
+.pricing {
+  padding-bottom: 12rem;
+}
+
+.pricing-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6rem;
+  text-align: center;
+}
+
+.pricing-wrap h2 {
+  font-weight: 600;
+  font-size: 5rem;
+}
+
+.pricing-cards-list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6rem;
+  padding: 4rem;
+  border: 1px solid #14102433;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.pricing-card h3 {
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.pricing-card-desc h4 {
+  font-weight: 600;
+  font-size: 5rem;
+}
+
+.pricing-card button {
+  background: var(--accent-color);
+  padding: 2.5rem 7rem;
+  border-radius: 5px;
+  font-size: 1.8rem;
+  color: white;
+  transition: all 0.3s;
+}
+
+.pricing-card:hover {
+  background: var(--main-color);
+  color: white;
+  transform: scale(1.1);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.pricing-card button:hover {
+  box-shadow: 0px 0px 20px #a3191e;
+  transition: all 0.3s;
+}
+
+/* #endregion pricing */
+
 /* #region coach popup */
 
 .coach-popup-wrap {
