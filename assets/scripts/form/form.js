@@ -27,21 +27,21 @@
     if (!isValidName(userInput.name)) {
       errorObjects.push({
         forElement: nameErrorArea,
-        text: 'Invalid name UIUIUI!'
+        text: 'Invalid name format'
       });
     }
 
     if (!isValidPhone(userInput.phone)) {
       errorObjects.push({
         forElement: phoneErrorArea,
-        text: 'Invalid phone FGFGFGFGF'
+        text: 'Invalid phone format'
       });
     }
 
     if (!isValidEmail(userInput.email)) {
       errorObjects.push({
         forElement: emailErrorArea,
-        text: 'Invalid email KLAKLAKLA'
+        text: 'Invalid email format'
       });
     }
 

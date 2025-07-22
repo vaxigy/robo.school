@@ -456,23 +456,8 @@ header {
 }
 
 .form-error-msg {
-  position: absolute;
-  right: -2rem;
-  transform: translateX(100%);
   color: yellow;
   display: none;
-}
-
-#name-error-msg {
-  top: 1.5rem;
-}
-
-#phone-error-msg {
-  top: 8.5rem;
-}
-
-#email-error-msg {
-  top: 15.5rem;
 }
 
 /* #endregion form */
