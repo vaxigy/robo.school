@@ -157,10 +157,13 @@
               <p>Акция действительна до 10 марта 2022 года</p>
             </div>
             <form>
-              <input type="text" placeholder="Имя">
-              <input type="tel" placeholder="Телефон">
-              <input type="email" placeholder="E-mail">
-              <input type="submit" value="Оформить заявку">
+              <input type="text" id="name" placeholder="Имя">
+              <span class="form-error-msg" id="name-error-msg"></span>
+              <input type="tel" id="phone" placeholder="Телефон">
+              <span class="form-error-msg" id="phone-error-msg"></span>
+              <input type="email" id="email" placeholder="E-mail">
+              <span class="form-error-msg" id="email-error-msg"></span>
+              <input type="submit" id="submit" value="Оформить заявку">
             </form>
           </div>
         </div>
@@ -185,8 +188,9 @@
         <div class="coach-content" id="coach-content"></div>
       </div>
     </div>
+    <script src="./assets/scripts/coach/coach-data.js"></script>
+    <script src="./assets/scripts/coach/coach-cards.js"></script>
+    <script src="./assets/scripts/coach/coach-popup.js"></script>
+    <script src="./assets/scripts/form/form.js"></script>
   </body>
-  <script src="./assets/scripts/coach-data.js"></script>
-  <script src="./assets/scripts/coach-cards.js"></script>
-  <script src="./assets/scripts/coach-popup.js"></script>
 </html>
