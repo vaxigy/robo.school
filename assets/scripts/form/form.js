@@ -9,6 +9,10 @@
   const phoneErrorArea = document.getElementById('phone-error-msg');
   const emailErrorArea = document.getElementById('email-error-msg');
 
+  const namePattern = /^[\w ']{3,50}$/;
+  const phonePattern = /^(\+\d{1,3}[ -]?|0)(\(\d{1,4}\)|\d{1,4})[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}$/;
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   function collectUserInput() {
     const name = nameForm.value.trim();
     const phone = phoneForm.value.trim();
@@ -18,46 +22,67 @@
       name: name,
       phone: phone,
       email: email
-    }
+    };
   }
 
   function validate(userInput) {
     const errorObjects = [];
 
-    if (!isValidName(userInput.name)) {
+    const nameErrorMessage = validateName(userInput.name);
+    if (nameErrorMessage) {
       errorObjects.push({
         forElement: nameErrorArea,
-        text: 'Invalid name format'
+        text: nameErrorMessage
       });
     }
 
-    if (!isValidPhone(userInput.phone)) {
+    const phoneErrorMessage = validatePhone(userInput.phone);
+    if (phoneErrorMessage) {
       errorObjects.push({
         forElement: phoneErrorArea,
-        text: 'Invalid phone format'
+        text: phoneErrorMessage
       });
     }
 
-    if (!isValidEmail(userInput.email)) {
+    const emailErrorMessage = validateEmail(userInput.email);
+    if (emailErrorMessage) {
       errorObjects.push({
         forElement: emailErrorArea,
-        text: 'Invalid email format'
+        text: emailErrorMessage
       });
     }
 
     return errorObjects;
   }
 
-  function isValidName(name) {
-    return /^[\w ]{3,50}$/.test(name);
+  function validateName(name) {
+    if (!name) {
+      return 'Заполните поле';
+    }
+    if (!namePattern.test(name)) {
+      return 'Недопустимое имя';
+    }
+    return '';
   }
 
-  function isValidPhone(phone) {
-    return /^(\+\d{1,3}[ -])?\d{2,3}[ -]?\d{2}[ -]?\d{2}$/.test(phone);
+  function validatePhone(phone) {
+    if (!phone) {
+      return 'Заполните поле';
+    }
+    if (!phonePattern.test(phone)) {
+      return 'Убедитесь, что это правильный номер'
+    }
+    return '';
   }
 
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  function validateEmail(email) {
+    if (!email) {
+      return 'Заполните поле';
+    }
+    if (!emailPattern.test(email)) {
+      return 'Убедитесь, что это правильный e-mail'
+    }
+    return '';
   }
 
   function sendData(dataObject) {
@@ -69,14 +94,14 @@
       const area = error.forElement;
       const text = error.text;
 
-      area.innerHTML = text;
+      area.innerText = text;
       area.style.display = 'block';
     });
   }
 
   function clearErrorMessages(...errorAreas) {
     errorAreas.forEach(area => {
-      area.innerHTML = '';
+      area.innerText = '';
       area.style.display = 'none';
     });
   }
@@ -102,7 +127,7 @@
   }
 
   function initializeModule() {
-    submitButton.addEventListener('click', handleSubmitAttempt)
+    submitButton.addEventListener('click', handleSubmitAttempt);
   }
 
   document.addEventListener('DOMContentLoaded', initializeModule);
