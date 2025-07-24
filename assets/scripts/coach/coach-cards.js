@@ -11,7 +11,7 @@
       <img src="${coach.image}" alt="coach">
       <h3>${coach.name}</h3>
       <p>${coach.occupation}</p>
-      <button>Подробнее</button>
+      <button class="effect-double-line-accent">Подробнее</button>
     `;
     return card;
   }
