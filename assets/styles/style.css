@@ -44,12 +44,12 @@ a {
 }
 
 .container-large {
-  max-width: 1720px;
+  max-width: 172rem;
   margin: 0 auto;
 }
 
 .container {
-  max-width: 1160px;
+  max-width: 116rem;
   margin: 0 auto;
 }
 
@@ -76,14 +76,14 @@ a {
 .button-accent {
   background: var(--accent-color);
   padding: 3rem 6rem;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   font-size: 1.8rem;
   color: white;
   transition: all 0.3s;
 }
 
 .button-accent:hover {
-  box-shadow: 0px 0px 20px #a3191e;
+  box-shadow: 0px 0px 2rem #a3191e;
   transition: all 0.3s;
 }
 
@@ -98,7 +98,7 @@ a {
   top: 0;
   left: -100%;
   width: 100%;
-  height: 1px;
+  height: 0.1rem;
   background: var(--accent-color);
   transition: all 0.3s;
 }
@@ -114,7 +114,7 @@ a {
   bottom: 0;
   right: -100%;
   width: 100%;
-  height: 1px;
+  height: 0.1rem;
   background: var(--accent-color);
   transition: all 0.3s;
 }
@@ -302,9 +302,9 @@ header {
   background: white;
   font-weight: 400;
   font-size: 1.6rem;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   white-space: nowrap;
-  box-shadow: 0px 0px 8px #1410241A;
+  box-shadow: 0px 0px 0.8rem #1410241A;
   display: none;
 }
 
@@ -374,19 +374,18 @@ header {
 }
 
 .coach-list::-webkit-scrollbar {
-  width: 5px;
-  height: 10px;
+  height: 0.5rem;
 }
 
 .coach-list::-webkit-scrollbar-track {
   background: #14102414;
-  border-radius: 10px;
+  border-radius: 1rem;
   margin-right: 80rem;
 }
 
 .coach-list::-webkit-scrollbar-thumb {
   background-color: var(--main-color);
-  border-radius: 10px;
+  border-radius: 1rem;
 }
 
 .coaches-wrap>button {
@@ -444,8 +443,8 @@ header {
   justify-content: space-between;
   gap: 6rem;
   padding: 4rem;
-  border: 1px solid #14102433;
-  border-radius: 20px;
+  border: 0.1rem solid #14102433;
+  border-radius: 2rem;
   transition: 0.3s;
 }
 
@@ -515,7 +514,7 @@ header {
   width: 50rem;
   padding: 2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   outline: none;
   font-size: 1.8rem;
 }
@@ -596,7 +595,7 @@ footer {
   left: 50vw;
   transform: translateX(-50%) translateY(-50%);
   padding: 4rem;
-  border-radius: 20px;
+  border-radius: 2rem;
   background: white;
   font-family: var(--main-font);
   font-size: 1.8rem;
@@ -621,7 +620,7 @@ footer {
   width: 16rem;
   height: 100%;
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 2rem;
 }
 
 .coach-info {
@@ -657,7 +656,7 @@ footer {
   gap: 18rem;
   margin-top: 4rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid #1410241C;
+  border-bottom: 0.1rem solid #1410241C;
 }
 
 .coach-tabs button {
@@ -678,3 +677,165 @@ footer {
 }
 
 /* #endregion coach popup */
+
+/* #region media for desktops and laptops */
+
+@media (max-width: 1824px) {
+  html {
+    font-size: 59.375%;
+  }
+}
+
+@media (max-width: 1728px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+
+@media (max-width: 1632px) {
+  html {
+    font-size: 53.125%;
+  }
+}
+
+@media (max-width: 1536px) {
+  html {
+    font-size: 50%;
+  }
+}
+
+@media (max-width: 1440px) {
+  html {
+    font-size: 46.875%;
+  }
+}
+
+@media (max-width: 1344px) {
+  html {
+    font-size: 43.75%;
+  }
+}
+
+/* #endregion media for desktops and laptops */
+
+/* #region media for tablets */
+
+@media (max-width: 1248px) {
+  .container-large {
+    max-width: 95.5%;
+  }
+
+  .container {
+    max-width: 90%;
+  }
+
+  .hero-wrap {
+    position: relative;
+    flex-direction: column;
+    height: unset;
+    padding-top: 5rem;
+  }
+
+  .hero-left {
+    align-items: center;
+    transform: unset;
+  }
+
+  .hero-desc {
+    text-align: center;
+  }
+
+  .hero-left .button-accent {
+    position: absolute;
+    bottom: 4rem;
+    z-index: 2;
+    width: 46.5%; /* 44.5%*/
+  }
+
+  .hero-right {
+    height: 85rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-ellipse {
+    right: unset;
+  }
+
+  .about-achievements {
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .about-achievements-item {
+    flex: 1 0 calc(50% - 2rem);
+  }
+
+  .about-achievements-item p {
+    display: inline-block;
+  }
+
+  .outcomes-list {
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .outcomes-item {
+    flex: 1 0 100%;
+  }
+
+  .outcomes-item p {
+    display: inline-block;
+  }
+
+  .coaches-wrap>button {
+    display: none;
+  }
+
+  .coach-list::-webkit-scrollbar-track {
+    margin-right: 68rem;
+  }
+
+  .pricing-cards-list {
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .pricing-card {
+    flex: 1 0 calc(50% - 4rem);
+  }
+
+  .pricing-card:hover {
+    transform: scale(1.03);
+  }
+
+  .pricing-cards-list .pricing-card:first-child {
+    flex-basis: 100%;
+  }
+
+  .pricing-cards-list .pricing-card:first-child .pricing-card-desc p {
+    display: inline-block;
+  }
+
+  .form-wrap {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .form-discount-text {
+    transform: unset;
+    color: white;
+    text-align: center;
+  }
+
+  .form-discount-text h3 {
+    display: inline-block;
+  }
+
+  .percents-img {
+    height: 8rem;
+  }
+}
+
+/* #endregion media for tablets */
