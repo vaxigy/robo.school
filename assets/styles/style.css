@@ -149,11 +149,19 @@ header {
   transition: all 0.2s;
 }
 
-.header-about {
+.header-menu {
   display: flex;
   gap: 4rem;
   font-weight: 400;
   font-size: 2rem;
+}
+
+.mobile-menu-close {
+  display: none;
+}
+
+.mobile-header-right {
+  display: none;
 }
 
 /* #endregion header */
@@ -839,3 +847,150 @@ footer {
 }
 
 /* #endregion media for tablets */
+
+/* #region media for mobile */
+
+@media (max-width: 648px) {
+  header {
+    padding: 2rem 0;
+  }
+
+  header .tel {
+    display: none;
+  }
+
+  .mobile-header-right {
+    display: flex;
+    gap: 10px;
+  }
+
+  .mobile-tel {
+    width: 44px;
+    height: 44px;
+    background: url(../images/icon-phone.png) no-repeat center / contain;
+  }
+
+  .mobile-menu-open {
+    width: 44px;
+    height: 44px;
+    background: url(../images/icon-menu.png) no-repeat center / contain;
+  }
+
+  .header-menu {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    background: var(--main-color);
+    z-index: 10000;
+  }
+
+  .mobile-menu-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    display: block;
+    background: url(../images/icon-close.png) no-repeat center / contain;
+  }
+
+  .header-menu.hidden-mobile {
+    display: none;
+  }
+
+  .header-menu a {
+    font-size: 4rem;
+    font-weight: 600;
+  }
+
+  .hero-left .button-accent {
+    width: 65%;
+  }
+}
+
+@media (max-width: 592px) {
+  .coach-list::-webkit-scrollbar-track {
+    margin-right: 0;
+  }
+
+  .pricing-card .button-accent {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 530px) {
+  .hero-wrap {
+    padding: 5rem 0;
+  }
+
+  .hero-left h1 {
+    font-size: 5rem;
+  }
+
+  .hero-right {
+    height: 50rem;
+  }
+
+  .hero-ellipse {
+    width: 40rem;
+    height: 40rem;
+  }
+
+  .hero-left .button-accent {
+    width: 100%;
+  }
+
+  .about-achievements-item {
+    flex-basis: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-wrap {
+    position: relative;
+  }
+
+  .footer-wrap .tel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    white-space: nowrap;
+    font-size: 2.5rem;
+  }
+
+  .footer-left {
+    align-items: center;
+    gap: 13rem;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 390px) {
+  .form-wrap {
+    padding: 9rem 0rem;
+  }
+
+  .form-wrap form {
+    width: 100%;
+  }
+
+  .form-wrap form input {
+    width: 100%;
+  }
+
+  .section-heading {
+    font-size: 4rem;
+  }
+}
+
+/* #endregion media for mobile */
