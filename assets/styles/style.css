@@ -711,6 +711,10 @@ footer {
 }
 
 @media (max-width: 1344px) {
+  .container-large {
+    max-width: 95.5%;
+  }
+
   html {
     font-size: 43.75%;
   }
@@ -720,11 +724,7 @@ footer {
 
 /* #region media for tablets */
 
-@media (max-width: 1248px) {
-  .container-large {
-    max-width: 95.5%;
-  }
-
+@media (max-width: 996px) {
   .container {
     max-width: 90%;
   }
@@ -749,7 +749,7 @@ footer {
     position: absolute;
     bottom: 4rem;
     z-index: 2;
-    width: 46.5%; /* 44.5%*/
+    width: 46.5%;
   }
 
   .hero-right {
