@@ -26,6 +26,12 @@ body {
   line-height: 1.6;
   display: flex;
   flex-direction: column;
+  overflow: unset;
+}
+
+body.popup-open {
+  margin-right: 15px;
+  overflow: hidden;
 }
 
 main {
@@ -654,9 +660,20 @@ footer {
   gap: 1rem;
 }
 
-.coach-social img {
+.coach-social a {
   width: 3rem;
   height: 3rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.coach-social a[load-icon="facebook"] {
+  background-image: url('../images/icon-facebook.png');
+}
+
+.coach-social a[load-icon="instagram"] {
+  background-image: url('../images/icon-instagram.png');
 }
 
 .coach-tabs {
@@ -669,6 +686,12 @@ footer {
 
 .coach-tabs button {
   font-size: 2rem;
+  transition: all 0.3s;
+}
+
+.coach-tabs button:hover {
+  color: var(--accent-color);
+  transition: all 0.3s;
 }
 
 .coach-tabs button.active {

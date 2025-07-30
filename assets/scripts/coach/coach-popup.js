@@ -1,10 +1,12 @@
 (() => {
+  const body = document.querySelector('body');
+
   const popupWrap = document.getElementById('coach-popup-wrap');
   const popupParts = {
     profile: document.getElementById('coach-profile'),
     tabs: document.getElementById('coach-tabs'),
     content: document.getElementById('coach-content')
-  }
+  };
 
   function handleOuterClick(event) {
     if (event.target === popupWrap) {
@@ -19,20 +21,35 @@
     return avatar;
   }
 
+  function createCoachSocial(coach) {
+    const socialData = coach.social;
+
+    const socialContainer = document.createElement('div');
+    socialContainer.classList.add('coach-social');
+
+    for (const key in socialData) {
+      const socialElement = document.createElement('a');
+      socialElement.setAttribute('href', socialData[key]);
+      socialElement.setAttribute('target', '_blank');
+      socialElement.setAttribute('load-icon', key);
+
+      socialContainer.appendChild(socialElement);
+    }
+
+    return socialContainer;
+  }
+
   function createCoachInfo(coach) {
-    const info = document.createElement('div');
-    info.classList.add('coach-info');
-    info.innerHTML = `
-      <div class="coach-info">
-        <h3>${coach.name}</h3>
-        <p>${coach.occupation}</p>
-        <div class="coach-social">
-          <img src="./assets/images/icon-facebook.png" alt="facebook">
-          <img src="./assets/images/icon-instagram.png" alt="instagram">
-        </div>
-      </div>
+    const infoContainer = document.createElement('div');
+    infoContainer.classList.add('coach-info');
+
+    infoContainer.innerHTML = `
+      <h3>${coach.name}</h3>
+      <p>${coach.occupation}</p>
     `;
-    return info;
+    infoContainer.appendChild(createCoachSocial(coach));
+
+    return infoContainer;
   }
 
   function createCloseButton() {
@@ -93,6 +110,8 @@
     popupParts.tabs.querySelector('[content-key="education"]').classList.add('active');
 
     popupWrap.style.visibility = 'visible';
+    
+    body.classList.add('popup-open');
   }
 
   function closeCoachPopup() {
@@ -101,6 +120,8 @@
     }
 
     popupWrap.style.visibility = 'hidden';
+
+    body.classList.remove('popup-open');
   }
 
   function initializeModule() {
