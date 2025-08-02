@@ -1,132 +1,181 @@
 (() => {
-  const body = document.querySelector('body');
+  const DOM_IDS = {
+    popupWrap: 'coach-popup-wrap',
+    profileContainer: 'coach-profile',
+    tabsContainer: 'coach-tabs',
+    contentContainer: 'coach-content',
+  }
 
-  const popupWrap = document.getElementById('coach-popup-wrap');
-  const popupParts = {
-    profile: document.getElementById('coach-profile'),
-    tabs: document.getElementById('coach-tabs'),
-    content: document.getElementById('coach-content')
+  const DOMElements = {
+    body: document.querySelector('body'),
+
+    popupWrap: document.getElementById(DOM_IDS.popupWrap),
+
+    profileContainer: document.getElementById(DOM_IDS.profileContainer),
+    tabsContainer: document.getElementById(DOM_IDS.tabsContainer),
+    contentContainer: document.getElementById(DOM_IDS.contentContainer),
   };
 
+  const contentKeys = {
+    EDUCATION: 'education',
+    EXPERIENCE: 'experience',
+    REWARDS: 'rewards'
+  };
+
+  const contentKeysLabels = {
+    [contentKeys.EDUCATION]: 'Образование',
+    [contentKeys.EXPERIENCE]: 'Опыт работы',
+    [contentKeys.REWARDS]: 'Награды'
+  };
+
+  const utils = {
+    clearNode: function (node) {
+      node.innerHTML = '';
+    }
+  }
+
+  const elementFactory = {
+    createAvatar: function (coach) {
+      const avatar = document.createElement('img');
+      avatar.setAttribute('src', coach.image);
+      avatar.setAttribute('alt', 'coach');
+      return avatar;
+    },
+
+    createSocial: function (coach) {
+      const socialData = coach.social;
+
+      const socialContainer = document.createElement('div');
+      socialContainer.classList.add('coach-social');
+
+      for (const socialType in socialData) {
+        const socialLink = document.createElement('a');
+        socialLink.setAttribute('href', socialData[socialType]);
+        socialLink.setAttribute('target', '_blank');
+        socialLink.setAttribute('rel', 'noopener noreferrer');
+        socialLink.setAttribute('social-type', socialType);
+
+        socialContainer.appendChild(socialLink);
+      }
+
+      return socialContainer;
+    },
+
+    createInfo: function (coach) {
+      const infoContainer = document.createElement('div');
+      infoContainer.classList.add('coach-info');
+
+      infoContainer.innerHTML = `
+        <h3>${coach.name}</h3>
+        <p>${coach.occupation}</p>
+      `;
+      infoContainer.appendChild(elementFactory.createSocial(coach));
+
+      return infoContainer;
+    },
+
+    createCloseButton: function () {
+      const button = document.createElement('button');
+      button.innerText = 'Закрыть';
+      button.addEventListener('click', closeCoachPopup);
+      return button;
+    },
+
+    createTabButton: function (contentKey, innerText) {
+      const tab = document.createElement('button');
+      tab.setAttribute('content-key', contentKey);
+      tab.innerText = innerText;
+      return tab;
+    }
+  }
+
+  function renderProfile(coach) {
+    utils.clearNode(DOMElements.profileContainer);
+
+    const avatar = elementFactory.createAvatar(coach);
+    const info = elementFactory.createInfo(coach);
+    const closeButton = elementFactory.createCloseButton();
+
+    DOMElements.profileContainer.appendChild(avatar);
+    DOMElements.profileContainer.appendChild(info);
+    DOMElements.profileContainer.appendChild(closeButton);
+  }
+
+  function renderTabs(coach) {
+    utils.clearNode(DOMElements.tabsContainer);
+
+    Object.values(contentKeys).forEach((contentKey) => {
+      const tab = elementFactory.createTabButton(
+        contentKey,
+        contentKeysLabels[contentKey]
+      );
+
+      DOMElements.tabsContainer.appendChild(tab);
+    });
+
+    DOMElements.tabsContainer.addEventListener(
+      'click',
+      (event) => handleTabClick(event, coach)
+    );
+  }
+
   function handleOuterClick(event) {
-    if (event.target === popupWrap) {
+    if (event.target === DOMElements.popupWrap) {
       closeCoachPopup();
     }
   }
 
-  function createCoachAvatar(coach) {
-    const avatar = document.createElement('img');
-    avatar.setAttribute('src', coach.image);
-    avatar.setAttribute('alt', 'coach');
-    return avatar;
-  }
-
-  function createCoachSocial(coach) {
-    const socialData = coach.social;
-
-    const socialContainer = document.createElement('div');
-    socialContainer.classList.add('coach-social');
-
-    for (const key in socialData) {
-      const socialElement = document.createElement('a');
-      socialElement.setAttribute('href', socialData[key]);
-      socialElement.setAttribute('target', '_blank');
-      socialElement.setAttribute('load-icon', key);
-
-      socialContainer.appendChild(socialElement);
-    }
-
-    return socialContainer;
-  }
-
-  function createCoachInfo(coach) {
-    const infoContainer = document.createElement('div');
-    infoContainer.classList.add('coach-info');
-
-    infoContainer.innerHTML = `
-      <h3>${coach.name}</h3>
-      <p>${coach.occupation}</p>
-    `;
-    infoContainer.appendChild(createCoachSocial(coach));
-
-    return infoContainer;
-  }
-
-  function createCloseButton() {
-    const button = document.createElement('button');
-    button.innerText = 'Закрыть';
-    button.addEventListener('click', closeCoachPopup);
-    return button;
-  }
-
-  function renderProfileSection(coach) {
-    popupParts.profile.innerHTML = '';
-
-    const avatar = createCoachAvatar(coach);
-    const info = createCoachInfo(coach);
-    const closeButton = createCloseButton();
-
-    popupParts.profile.appendChild(avatar);
-    popupParts.profile.appendChild(info);
-    popupParts.profile.appendChild(closeButton);
-  }
-
-  function renderTabButtons(coach) {
-    popupParts.tabs.innerHTML = '';
-
-    popupParts.tabs.innerHTML = `
-      <button content-key="education">Образование</button>
-      <button content-key="experience">Опыт работы</button>
-      <button content-key="rewards">Награды</button>
-    `;
-
-    popupParts.tabs.addEventListener('click', event => handleTabClick(event, coach));
-  }
-
   function handleTabClick(event, coach) {
-    if (event.target.tagName === 'BUTTON') {
-      const selectedTab = event.target;
+    const target = event.target;
 
-      for (const tab of popupParts.tabs.children) {
+    if (target.parentNode === DOMElements.tabsContainer) {
+      const selectedTab = target;
+
+      for (const tab of DOMElements.tabsContainer.children) {
         tab.classList.remove('active');
       }
       selectedTab.classList.add('active');
 
-      loadCoachPopupContent(coach, selectedTab.getAttribute('content-key'));
+      loadCoachContent(coach, selectedTab.getAttribute('content-key'));
     }
   }
 
-  function loadCoachPopupContent(coach, contentKey) {
-    popupParts.content.innerHTML = '';
+  function loadCoachContent(coach, contentKey) {
+    utils.clearNode(DOMElements.contentContainer);
 
-    popupParts.content.innerHTML = coach.details[contentKey];
+    DOMElements.contentContainer.innerText = coach.details[contentKey];
   }
 
   function showCoachPopup(coach) {
-    renderProfileSection(coach);
-    renderTabButtons(coach);
+    renderProfile(coach);
+    renderTabs(coach);
 
-    loadCoachPopupContent(coach, 'education');
-    popupParts.tabs.querySelector('[content-key="education"]').classList.add('active');
+    loadCoachContent(coach, contentKeys.EDUCATION);
+    DOMElements.tabsContainer
+      .querySelector(`[content-key=${contentKeys.EDUCATION}]`)
+      .classList.add('active');
 
-    popupWrap.style.visibility = 'visible';
-    
-    body.classList.add('popup-open');
+    DOMElements.popupWrap.classList.add('active');
+
+    DOMElements.body.classList.add('popup-open');
   }
 
   function closeCoachPopup() {
-    for (const key in popupParts) {
-      popupParts[key].innerHTML = '';
-    }
+    [
+      DOMElements.profileContainer,
+      DOMElements.tabsContainer,
+      DOMElements.contentContainer
+    ].forEach(utils.clearNode);
 
-    popupWrap.style.visibility = 'hidden';
+    DOMElements.popupWrap.classList.remove('active');
 
-    body.classList.remove('popup-open');
+    DOMElements.body.classList.remove('popup-open');
   }
 
   function initializeModule() {
-    popupWrap.style.visibility = 'hidden';
-    popupWrap.addEventListener('click', handleOuterClick);
+    DOMElements.popupWrap.classList.remove('active');
+
+    DOMElements.popupWrap.addEventListener('click', handleOuterClick);
 
     window.showCoachPopup = showCoachPopup;
   }

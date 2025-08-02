@@ -601,6 +601,10 @@ footer {
   z-index: 10000;
 }
 
+.coach-popup-wrap.active {
+  visibility: visible;
+}
+
 .coach-popup {
   position: fixed;
   display: flex;
@@ -668,11 +672,11 @@ footer {
   background-size: contain;
 }
 
-.coach-social a[load-icon="facebook"] {
+.coach-social a[social-type="facebook"] {
   background-image: url('../images/icon-facebook.png');
 }
 
-.coach-social a[load-icon="instagram"] {
+.coach-social a[social-type="instagram"] {
   background-image: url('../images/icon-instagram.png');
 }
 
