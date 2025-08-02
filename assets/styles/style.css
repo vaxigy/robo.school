@@ -680,6 +680,10 @@ footer {
   background-image: url('../images/icon-instagram.png');
 }
 
+.coach-tabs-trigger-mobile {
+  display: none;
+}
+
 .coach-tabs {
   display: flex;
   gap: 18rem;
@@ -871,6 +875,24 @@ footer {
   .percents-img {
     height: 8rem;
   }
+
+  .coach-popup {
+    width: 66%;
+  }
+}
+
+@media (max-width: 816px) {
+  .coach-tabs {
+    gap: unset;
+    justify-content: space-between;
+  }
+
+  .coach-profile>button {
+    font-size: 0;
+    width: 13px;
+    height: 13px;
+    background: url(../images/icon-close-2.png) no-repeat center / contain;
+  }
 }
 
 /* #endregion media for tablets */
@@ -941,6 +963,67 @@ footer {
   .hero-left .button-accent {
     width: 65%;
   }
+
+  .coach-popup {
+    width: 94%;
+    max-height: 60%;
+  }
+
+  .coach-tabs-trigger-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--accent-color);
+    padding: 10px 0;
+    margin-top: 20px;
+  }
+
+  .coach-tabs-trigger-mobile button {
+    position: relative;
+    font-size: 2rem;
+    color: white;
+  }
+
+  .coach-tabs-trigger-mobile button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: url(../images/arrow-down.png) no-repeat center / contain;
+  }
+
+  .coach-tabs {
+    flex-direction: column;
+    border: 1px solid #1410241C;
+    padding-bottom: unset;
+    margin-top: unset;
+    overflow-y: hidden;
+    min-height: 110px;
+    max-height: 110px;
+    transition: all 0.3s;
+  }
+
+  .coach-popup-wrap:not(.active) .coach-tabs {
+    display: none;
+  }
+
+  .coach-tabs.hidden-mobile {
+    border-color: transparent;
+    min-height: 0;
+    max-height: 0;
+    transition: all 0.3s;
+  }
+
+  .coach-tabs button {
+    padding: 10px 0;
+  }
+
+  .coach-content {
+    max-height: 45%;
+  }
 }
 
 @media (max-width: 592px) {
@@ -999,6 +1082,26 @@ footer {
     align-items: center;
     gap: 13rem;
     margin: 0 auto;
+  }
+
+  .coach-popup {
+    padding: 3rem;
+  }
+
+  .coach-profile {
+    gap: 2rem;
+    height: unset;
+  }
+
+  .coach-profile>img {
+    width: 9rem;
+    height: unset;
+    border-radius: 5px;
+  }
+
+  .coach-profile>button {
+    top: -10px;
+    right: -10px;
   }
 }
 

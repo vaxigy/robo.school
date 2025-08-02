@@ -4,7 +4,10 @@
     profileContainer: 'coach-profile',
     tabsContainer: 'coach-tabs',
     contentContainer: 'coach-content',
+    tabsTriggerMobile: 'coach-tabs-trigger-mobile'
   }
+
+  const MOBILE_BREAKPOINT = '(max-width: 648px)';
 
   const DOMElements = {
     body: document.querySelector('body'),
@@ -14,7 +17,11 @@
     profileContainer: document.getElementById(DOM_IDS.profileContainer),
     tabsContainer: document.getElementById(DOM_IDS.tabsContainer),
     contentContainer: document.getElementById(DOM_IDS.contentContainer),
+
+    tabsTriggerMobile: document.getElementById(DOM_IDS.tabsTriggerMobile)
   };
+
+  const isMobile = window.matchMedia(MOBILE_BREAKPOINT).matches;
 
   const contentKeys = {
     EDUCATION: 'education',
@@ -136,6 +143,13 @@
       }
       selectedTab.classList.add('active');
 
+      if (isMobile) {
+        DOMElements.tabsTriggerMobile
+          .querySelector(':first-child').innerText = selectedTab.innerText;
+
+        toggleTabsMobile(true);
+      }
+
       loadCoachContent(coach, selectedTab.getAttribute('content-key'));
     }
   }
@@ -144,6 +158,11 @@
     utils.clearNode(DOMElements.contentContainer);
 
     DOMElements.contentContainer.innerText = coach.details[contentKey];
+  }
+  
+  function toggleTabsMobile(force) {
+    force = typeof force === 'boolean' ? force : undefined;
+    DOMElements.tabsContainer.classList.toggle('hidden-mobile', force);
   }
 
   function showCoachPopup(coach) {
@@ -154,6 +173,16 @@
     DOMElements.tabsContainer
       .querySelector(`[content-key=${contentKeys.EDUCATION}]`)
       .classList.add('active');
+
+    if (isMobile) {
+      toggleTabsMobile(true);
+
+      DOMElements.tabsTriggerMobile
+        .querySelector(':first-child')
+        .innerText = contentKeysLabels[contentKeys.EDUCATION];
+
+      DOMElements.tabsTriggerMobile.addEventListener('click', toggleTabsMobile);
+    }
 
     DOMElements.popupWrap.classList.add('active');
 
