@@ -5,7 +5,7 @@
     tabsContainer: 'coach-tabs',
     contentContainer: 'coach-content',
     tabsTriggerMobile: 'coach-tabs-trigger-mobile'
-  }
+  };
 
   const MOBILE_BREAKPOINT = '(max-width: 648px)';
 
@@ -39,7 +39,7 @@
     clearNode: function (node) {
       node.innerHTML = '';
     }
-  }
+  };
 
   const elementFactory = {
     createAvatar: function (coach) {
@@ -94,7 +94,7 @@
       tab.innerText = innerText;
       return tab;
     }
-  }
+  };
 
   function renderProfile(coach) {
     utils.clearNode(DOMElements.profileContainer);
@@ -124,6 +124,11 @@
       'click',
       (event) => handleTabClick(event, coach)
     );
+
+    if (isMobile) {
+      DOMElements.tabsTriggerMobile
+        .addEventListener('click', toggleTabsMobile);
+    }
   }
 
   function handleOuterClick(event) {
@@ -136,22 +141,24 @@
     const target = event.target;
 
     if (target.parentNode === DOMElements.tabsContainer) {
-      const selectedTab = target;
-
-      for (const tab of DOMElements.tabsContainer.children) {
-        tab.classList.remove('active');
-      }
-      selectedTab.classList.add('active');
-
-      if (isMobile) {
-        DOMElements.tabsTriggerMobile
-          .querySelector(':first-child').innerText = selectedTab.innerText;
-
-        toggleTabsMobile(true);
-      }
-
-      loadCoachContent(coach, selectedTab.getAttribute('content-key'));
+      showTab(target, coach);
     }
+  }
+
+  function showTab(targetTab, coach) {
+    for (const tab of DOMElements.tabsContainer.children) {
+      tab.classList.remove('active');
+    }
+    targetTab.classList.add('active');
+
+    if (isMobile) {
+      DOMElements.tabsTriggerMobile
+        .querySelector(':first-child').innerText = targetTab.innerText;
+
+      toggleTabsMobile(true);
+    }
+
+    loadCoachContent(coach, targetTab.getAttribute('content-key'));
   }
 
   function loadCoachContent(coach, contentKey) {
@@ -169,20 +176,9 @@
     renderProfile(coach);
     renderTabs(coach);
 
-    loadCoachContent(coach, contentKeys.EDUCATION);
-    DOMElements.tabsContainer
-      .querySelector(`[content-key=${contentKeys.EDUCATION}]`)
-      .classList.add('active');
-
-    if (isMobile) {
-      toggleTabsMobile(true);
-
-      DOMElements.tabsTriggerMobile
-        .querySelector(':first-child')
-        .innerText = contentKeysLabels[contentKeys.EDUCATION];
-
-      DOMElements.tabsTriggerMobile.addEventListener('click', toggleTabsMobile);
-    }
+    const initialTab = DOMElements.tabsContainer
+      .querySelector(`[content-key="${contentKeys.EDUCATION}"]`);
+    showTab(initialTab, coach);
 
     DOMElements.popupWrap.classList.add('active');
 
