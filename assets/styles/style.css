@@ -764,6 +764,10 @@ footer {
 /* #region media for tablets */
 
 @media (max-width: 996px) {
+  body.popup-open {
+    margin-right: 0;
+  }
+
   .container {
     max-width: 90%;
   }
